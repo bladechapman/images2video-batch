@@ -1,6 +1,10 @@
 
 Stitch images into a video using batched ffmpeg passes.
 
+```python
+python3 images2video -i frames -a test-input.mp4 -o out.mp4
+```
+
 #### Why?
 ffmpeg seems to consume a lot of memory when concatenating images into a video. This script allows you to concatenate images in batches before stitching the video parts together, reducing memory load.
 
