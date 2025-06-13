@@ -53,7 +53,7 @@ def main():
         # process batches into videos
         subprocess.run([
                 "ffmpeg",
-                "-r", f"{args.framerate}",
+                "-framerate", f"{args.framerate}",
                 "-i", tmp_subdir.joinpath(f"frame_%d.{args.image_suffix}"),
                 "-map", "0:v:0",
                 "-c:v", "libx264",
@@ -78,8 +78,7 @@ def main():
         "-safe", "0",
         "-i", stitch_input_file.as_posix(),
         "-c", "copy",
-        tmp_dir.joinpath("stitched_no_audio.mp4").as_posix()
-        ])
+        tmp_dir.joinpath("stitched_no_audio.mp4").as_posix() ])
 
     # add audio
     subprocess.run([
@@ -92,6 +91,7 @@ def main():
         "-c:a", "copy",
         "-c:v", "libx264",
         "-qp", "0",
+        "-pix_fmt", "yuv420p",
         "-r", f"{args.framerate}",
         args.output.as_posix(),
         "-y",
