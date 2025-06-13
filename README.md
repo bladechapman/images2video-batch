@@ -12,4 +12,5 @@ ffmpeg seems to consume a lot of memory when concatenating images into a video. 
 Maybe. I fiddled with adjusting the look-ahead-buffer and group-of-picture settings but still encountered ballooning memory consumption. ffmpeg is a pretty sopshisticated tool though and I'm but a novice. Maybe a video codec wizard has the answer.
 
 #### Validated with:
-ffmpeg v7.0.2 built with Apple clang version 15.0.0 (clang-1500.3.9.4)
+- ffmpeg v7.0.2 built with Apple clang version 15.0.0 (clang-1500.3.9.4)
+- python v3.12.5
