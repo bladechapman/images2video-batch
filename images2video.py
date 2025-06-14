@@ -11,6 +11,7 @@ parser.add_argument("-o", "--output", type=Path)
 parser.add_argument("--batch-size", type=int)
 parser.add_argument("--framerate", type=int, required=False, default=24)
 parser.add_argument("--image_suffix", type=str, required=False, default="jpg")
+parser.add_argument("-crf", help="h264 constant rate factor. Valid values 0-51, lower is higher quality & more space.", type=int, required=False, default=23)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("video-stitch")
@@ -57,7 +58,7 @@ def main():
                 "-i", tmp_subdir.joinpath(f"frame_%d.{args.image_suffix}"),
                 "-map", "0:v:0",
                 "-c:v", "libx264",
-                "-qp", "0",
+                "-crf", str(args.crf),
                 "-r", f"{args.framerate}",
                 "-pix_fmt", "yuv420p",
                 mov_parts_subdir.joinpath(f"{int(i/batch_size):0{f_padding}d}.mp4"),
@@ -90,7 +91,6 @@ def main():
         "-map", "1:v:0",
         "-c:a", "copy",
         "-c:v", "libx264",
-        "-qp", "0",
         "-pix_fmt", "yuv420p",
         "-r", f"{args.framerate}",
         args.output.as_posix(),
